@@ -78,12 +78,12 @@ export default function Home() {
 
     // If user is not connected to the Rinkeby network, let them know and throw an error
     const { chainId } = await web3Provider.getNetwork();
-    if (chainId !== 4) {
+    if (chainId !== 5) {
       // window.alert('Change the network to Rinkeby');
       // throw new Error('Change network to Rinkeby');
       await provider.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x4' }], // chainId must be in hexadecimal numbers
+        params: [{ chainId: '0x5' }], // chainId must be in hexadecimal numbers
       });
     }
 
@@ -238,7 +238,7 @@ export default function Home() {
       // Assign the Web3Modal className to the reference object by setting it's `current` value
       // The `current` value is persisted throughout as long as this page is open
       web3ModalRef.current = new Web3Modal({
-        network: 'rinkeby',
+        network: 'goerli',
         providerOptions: {},
         disableInjectedProvider: false,
       });
