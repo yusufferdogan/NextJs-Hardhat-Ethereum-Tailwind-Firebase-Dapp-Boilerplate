@@ -14,7 +14,7 @@ import {
 } from 'firebase/firestore';
 
 const dbInstance = collection(database, 'notes');
-export default function page1({}) {
+export default function Page({}) {
   const [noteTitle, setNoteTitle] = useState('');
   const [noteDesc, setNoteDesc] = useState('');
   const [notesArray, setNotesArray] = useState([]);
@@ -59,62 +59,6 @@ export default function page1({}) {
           </div>
         </div>
       </section>
-
-      <div className="container row-auto mx-auto my-auto px-5 py-12">
-        <div className="columns-2">
-          <label htmlFor="title" className="leading-7 text-sm text-gray-600">
-            title
-          </label>
-          <input
-            type="title"
-            id="title"
-            name="title"
-            className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            onChange={(e) => setNoteTitle(e.target.value)}
-            value={noteTitle}
-          />
-        </div>
-        <div className="columns-2">
-          <label
-            htmlFor="description"
-            className="leading-7 text-sm text-gray-600"
-          >
-            description
-          </label>
-          <input
-            type="description"
-            id="description"
-            name="description"
-            className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            onChange={(e) => setNoteDesc(e.target.value)}
-            value={noteDesc}
-          />
-        </div>
-        <button
-          className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-          onClick={saveNote}
-        >
-          Submit
-        </button>
-      </div>
-
-      <div className={styles.codeBlock}>
-        <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4">
-          <p className="font-bold">NOTES:</p>
-          <br />
-          <div>
-            {notesArray.map((note) => {
-              return (
-                <div>
-                  <p key={note.id}>
-                    {note.noteTitle} {note.noteDesc}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
     </>
   );
 }
