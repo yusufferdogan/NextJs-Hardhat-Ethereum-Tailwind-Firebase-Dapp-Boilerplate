@@ -245,10 +245,6 @@ export default function Home() {
       connectWallet();
       getAddresses();
       checkIfAddressInWhitelist();
-      console.log(registeredAddresses);
-      console.log('joinedWhitelist', joinedWhitelist);
-      console.log('currentAddress,,useEffect', currentAddress);
-      // addToDatabase();
     }
   }, [walletConnected, currentAddress, registeredAddresses, joinedWhitelist]);
 

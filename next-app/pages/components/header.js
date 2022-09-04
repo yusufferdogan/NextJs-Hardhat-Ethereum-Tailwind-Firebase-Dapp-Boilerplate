@@ -30,19 +30,17 @@ export default function Header({
         </Link>
 
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-          <Link href="/page">
-            <a className="mr-5 hover:text-gray-900">First Page</a>
+          <Link href="/">
+            <a className="mr-5 hover:text-gray-900">Home</a>
           </Link>
 
-          <a className="mr-5 hover:text-gray-900" href="/page">
-            Second Page
-          </a>
-          <a className="mr-5 hover:text-gray-900" href="/page">
-            Third Page
-          </a>
-          <a className="mr-5 hover:text-gray-900" href="/page">
-            Fourth Page
-          </a>
+          <Link href="/MintPage">
+            <a className="mr-5 hover:text-gray-900">Mint</a>
+          </Link>
+
+          <Link href="/MintPage">
+            <a className="mr-5 hover:text-gray-900">Wallet</a>
+          </Link>
         </nav>
         <ToastContainer />
 

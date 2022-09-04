@@ -6,11 +6,16 @@
     "start": "next start"
   },
   "dependencies": {
+    "@walletconnect/web3-provider": "^1.8.0",
+    "add": "^2.0.6",
     "firebase": "^9.6.10",
+    "moralis": "^1.2.4",
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-toastify": "^9.0.8"
+    "react-moralis": "^1.4.1",
+    "react-toastify": "^9.0.8",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@types/node": "17.0.35",
