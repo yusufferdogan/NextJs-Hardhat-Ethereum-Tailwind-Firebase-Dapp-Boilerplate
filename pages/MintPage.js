@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import Image from 'next/image';
 import { CONTRACT_ADDRESS, abi } from '../constants/mint';
 import Footer from './components/footer';
 import Header from './components/header';
@@ -28,7 +29,7 @@ export default function MintPage({}) {
     } catch (error) {
       alert(error.message);
     }
-  }, []);
+  });
 
   return (
     <>
@@ -83,7 +84,7 @@ export default function MintPage({}) {
             </div>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img src="./crypto-devs.svg" />
+            <Image src="./crypto-devs.svg" alt="devs" />
           </div>
         </div>
       </section>

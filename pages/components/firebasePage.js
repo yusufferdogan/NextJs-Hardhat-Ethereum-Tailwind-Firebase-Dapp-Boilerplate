@@ -1,6 +1,7 @@
 import Footer from './footer';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/../../styles/Home.module.css';
 import Header from './header';
+import Image from 'next/image';
 import { app, database } from '../../firebaseConfig';
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -55,7 +56,7 @@ export default function FirebasePage({}) {
             </h1>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img src="./crypto-devs.svg" />
+            <Image src="./crypto-devs.svg" alt="devs" />
           </div>
         </div>
       </section>
@@ -105,8 +106,8 @@ export default function FirebasePage({}) {
           <div>
             {notesArray.map((note) => {
               return (
-                <div>
-                  <p key={note.id}>
+                <div key={note.id}>
+                  <p>
                     {note.noteTitle} {note.noteDesc}
                   </p>
                 </div>

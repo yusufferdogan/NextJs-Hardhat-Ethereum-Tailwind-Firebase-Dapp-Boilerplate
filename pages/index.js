@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import Web3Modal from 'web3modal';
 import { providers, Contract } from 'ethers';
@@ -273,7 +274,7 @@ export default function Home() {
             <div className="flex justify-center">{renderButton()}</div>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img src="./crypto-devs.svg" />
+            <Image src="./crypto-devs.svg" alt="devs" />
           </div>
         </div>
       </section>
@@ -285,7 +286,10 @@ export default function Home() {
         <br></br>
         {registeredAddresses.map((note) => {
           return (
-            <div className="container mx-auto flex px-6 md:flex-row flex-col items-center">
+            <div
+              key={note.id}
+              className="container mx-auto flex px-6 md:flex-row flex-col items-center"
+            >
               <p>{note.address}</p>
             </div>
           );
