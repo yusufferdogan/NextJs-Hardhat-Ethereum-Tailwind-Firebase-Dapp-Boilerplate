@@ -1,77 +1,49 @@
-export default function NFTBox({ address, id, url }) {
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { baseUri } from '../../constants/mint';
+
+export default function NFTBox(props) {
+  const [data, setData] = useState({});
+  const [rarity, setRarity] = useState(0.0);
+  useEffect(() => {
+    fetch(`${baseUri}/${props.id}.json`)
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+        setRarity(data.attributes[0].rarity);
+      });
+  }, []);
+  //          src={`${baseUri}/${props.id}.svg`}
+
   return (
-    <div className="p-4 md:w-1/3">
-      <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-        <img
-          className="lg:h-48 md:h-36 w-full object-cover object-center"
-          src="https://dummyimage.com/721x401"
-          alt="blog"
-        />
-        <div className="p-6">
-          <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-            CATEGORY
-          </h2>
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-            The 400 Blows
-          </h1>
-          <p className="leading-relaxed mb-3">
-            Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-            microdosing tousled waistcoat.
-          </p>
-          <div className="flex items-center flex-wrap">
-            <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
-              Learn More
-              <svg
-                className="w-4 h-4 ml-2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M5 12h14"></path>
-                <path d="M12 5l7 7-7 7"></path>
-              </svg>
-            </a>
-            <span
-              className="text-gray-400 mr-3 inline-flex items-center 
-            lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200"
-            >
-              <svg
-                className="w-4 h-4 mr-1"
-                stroke="currentColor"
-                stroke-width="2"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                viewBox="0 0 24 24"
-              >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-              1.2K
-            </span>
-            <span className="text-gray-400 inline-flex items-center leading-none text-sm">
-              <svg
-                className="w-4 h-4 mr-1"
-                stroke="currentColor"
-                stroke-width="2"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3
-                 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
-                ></path>
-              </svg>
-              6
-            </span>
-          </div>
-        </div>
+    <div className="container mb-12 lg:mb-0 py-6">
+      <div
+        className="shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover mb-6"
+        data-mdb-ripple="true"
+        data-mdb-ripple-color="light"
+      >
+        <img src={`${baseUri}/${props.id}.svg`} className="w-full" />
+
+        <a href="#!">
+          <div className="mask absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100"></div>
+        </a>
       </div>
+
+      <h5 className="text-lg font-bold mb-3">{data.name}</h5>
+      <div className="mb-3 text-blue-600 font-medium text-sm flex items-center justify-center lg:justify-start">
+        <svg
+          className="w-4 h-4 mr-2"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+        >
+          <path
+            fill="currentColor"
+            d="M437.2 403.5L320 215V64h8c13.3 0 24-10.7 24-24V24c0-13.3-10.7-24-24-24H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h8v151L10.8 403.5C-18.5 450.6 15.3 512 70.9 512h306.2c55.7 0 89.4-61.5 60.1-108.5zM137.9 320l48.2-77.6c3.7-5.2 5.8-11.6 5.8-18.4V64h64v160c0 6.9 2.2 13.2 5.8 18.4l48.2 77.6h-172z"
+          />
+        </svg>
+        Rarity: {rarity}
+      </div>
+      <p className="text-gray-500">{data.description}</p>
     </div>
   );
 }

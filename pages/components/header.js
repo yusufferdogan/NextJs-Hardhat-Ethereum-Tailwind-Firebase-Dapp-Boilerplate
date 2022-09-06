@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Header({
   walletConnected = false,
   currentAddress = '',
+  click = () => console.log('NAN'),
 }) {
   useEffect(() => {}, []);
   return (
@@ -25,32 +26,32 @@ export default function Header({
             >
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
             </svg>
-            <span className="ml-3 text-xl">NextJS Ethereum Boilerplate</span>
+            <span className="ml-3 text-2xl">NextJS Ethereum Boilerplate</span>
           </a>
         </Link>
 
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
           <Link href="/">
-            <a className="mr-5 hover:text-gray-900">Home</a>
+            <a className="mr-5 hover:text-gray-900 text-2xl">Home</a>
           </Link>
 
           <Link href="/MintPage">
-            <a className="mr-5 hover:text-gray-900">Mint</a>
+            <a className="mr-5 hover:text-gray-900 text-2xl">Mint</a>
           </Link>
 
-          <Link href="/MintPage">
-            <a className="mr-5 hover:text-gray-900">Wallet</a>
+          <Link href="/Wallet">
+            <a className="mr-5 hover:text-gray-900 text-2xl ">Wallet</a>
           </Link>
         </nav>
         <ToastContainer />
 
         {walletConnected ? (
           <button
-            className="text-white inline-flex items-center bg-amber-600 border-0 py-1 px-3 focus:outline-none hover:bg-amber-300 rounded text-base mt-4 md:mt-0"
+            className="text-center mx-auto inline-flex text-white bg-green-700 hover:bg-green-600 border-0 py-2 px-6 focus:outline-none  rounded text-lg"
             onClick={() => {
               navigator.clipboard.writeText(currentAddress);
               toast.info('Text copied to clipboard', {
-                position: 'top-right',
+                position: 'bottom-center',
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -68,7 +69,12 @@ export default function Header({
               )}
           </button>
         ) : (
-          <div></div>
+          <button
+            onClick={() => click()}
+            className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+          >
+            Connect Wallet
+          </button>
         )}
       </div>
     </header>

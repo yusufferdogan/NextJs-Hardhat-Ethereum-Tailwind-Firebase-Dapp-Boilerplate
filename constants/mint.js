@@ -1,3 +1,5 @@
+export const baseUri =
+  'https://gateway.pinata.cloud/ipfs/QmTMbpK3JJtCsQRXwrQf6keQBLUeTxRecFR1AindzDdiub';
 export const CONTRACT_ADDRESS = '0xB8a2a10f050D2cF0dd5CdbDaa7657AB7EF6cDADD';
 export const abi = [
   { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
