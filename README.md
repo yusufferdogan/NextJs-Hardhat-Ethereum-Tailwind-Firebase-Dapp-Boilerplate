@@ -6,7 +6,7 @@ In order to save data off chain on firebase you need to create a firebase accoun
 
 ##Check Demo
 
-<https://nextjs-ethereum-boilerplate.vercel.app/Wallet>
+<https://nextjs-ethereum-boilerplate.vercel.app/MintPage>
 
 Wallet Page
 ![image](https://user-images.githubusercontent.com/45846424/188631452-4589cc0c-1049-4e4a-8edc-0077bbd5e290.png)
