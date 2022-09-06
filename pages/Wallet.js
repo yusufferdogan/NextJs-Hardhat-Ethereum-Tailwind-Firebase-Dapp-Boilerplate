@@ -116,9 +116,6 @@ export default function WalletPage() {
           )}
         </section>
       </div>
-      <div className="absolute bottom-0" s>
-        <Footer></Footer>
-      </div>
     </>
   );
 }
