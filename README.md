@@ -4,6 +4,10 @@ NextJS module that consist lots of packages and config files
 
 In order to save data off chain on firebase you need to create a firebase account and firestore database. After that you need to create collection and set up firebase Config file; Firebase will save the addresses which has joined whitelist outside the blockchain. So you can save another input as well to save gas in smart contracts.
 
+## NFT Contract
+
+https://goerli.etherscan.io/address/0xB8a2a10f050D2cF0dd5CdbDaa7657AB7EF6cDADD#code
+
 ## Check Demo
 
 <https://nextjs-ethereum-boilerplate.vercel.app/MintPage>
