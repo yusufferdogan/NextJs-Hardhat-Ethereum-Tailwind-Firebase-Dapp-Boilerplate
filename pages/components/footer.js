@@ -17,7 +17,7 @@ export default function Footer() {
           </svg>
           <span className="ml-3 text-xl">NextJS Ethereum Boilerplate</span>
         </a>
-        <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
+        <p className="mr-16 text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
           © 2022 Yusuf Erdogan —
           <a
             href="https://github.com/yusufferdogan"
@@ -25,8 +25,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             target="_blank"
           >
-            @YusufErdogan NextJs-Hardhat-Ethereum-Tailwind-Firebase Dapp
-            Boilerplate
+            @YusufErdogan NextJs-Ethereum-Tailwind-Firebase Dapp Boilerplate
           </a>
         </p>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">

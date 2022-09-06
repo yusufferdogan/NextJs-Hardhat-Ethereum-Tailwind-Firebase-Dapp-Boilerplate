@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Header({
   walletConnected = false,
   currentAddress = '',
+  show = true,
   click = () => console.log('NAN'),
 }) {
   useEffect(() => {}, []);
@@ -32,7 +33,7 @@ export default function Header({
 
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
           <Link href="/">
-            <a className="mr-5 hover:text-gray-900 text-2xl">Home</a>
+            <a className="mr-5 hover:text-gray-900 text-2xl">Whitelist</a>
           </Link>
 
           <Link href="/MintPage">
@@ -45,36 +46,42 @@ export default function Header({
         </nav>
         <ToastContainer />
 
-        {walletConnected ? (
-          <button
-            className="text-center mx-auto inline-flex text-white bg-green-700 hover:bg-green-600 border-0 py-2 px-6 focus:outline-none  rounded text-lg"
-            onClick={() => {
-              navigator.clipboard.writeText(currentAddress);
-              toast.info('Text copied to clipboard', {
-                position: 'bottom-center',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              });
-            }}
-          >
-            {currentAddress.slice(0, 4) +
-              '...' +
-              currentAddress.slice(
-                currentAddress.length - 4,
-                currentAddress.length
-              )}
-          </button>
+        {show ? (
+          walletConnected ? (
+            <button
+              className="text-center mx-auto inline-flex text-white bg-green-700 hover:bg-green-600 border-0 py-2 px-6 focus:outline-none  rounded text-lg"
+              onClick={() => {
+                navigator.clipboard.writeText(currentAddress);
+                toast.info('Text copied to clipboard', {
+                  position: 'bottom-center',
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                });
+              }}
+            >
+              {currentAddress != ''
+                ? currentAddress.slice(0, 4) +
+                  '...' +
+                  currentAddress.slice(
+                    currentAddress.length - 4,
+                    currentAddress.length
+                  )
+                : ''}
+            </button>
+          ) : (
+            <button
+              onClick={() => click()}
+              className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            >
+              Connect Wallet
+            </button>
+          )
         ) : (
-          <button
-            onClick={() => click()}
-            className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-          >
-            Connect Wallet
-          </button>
+          <div></div>
         )}
       </div>
     </header>

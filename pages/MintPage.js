@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { CONTRACT_ADDRESS, abi } from '../constants/mint';
+import Footer from './components/footer';
 import Header from './components/header';
 import { useMoralis, useWeb3Contract } from 'react-moralis';
 import { ToastContainer, toast } from 'react-toastify';
@@ -27,12 +28,12 @@ export default function MintPage({}) {
     } catch (error) {
       alert(error.message);
     }
-  }, [enableWeb3, isWeb3Enabled, provider]);
+  }, []);
 
   return (
     <>
       <ToastContainer />
-      {Header({ currentAddress: '', walletConnected: false })}
+      {Header({ show: false })}
 
       <section className="text-gray-600 body-font">
         <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
@@ -86,6 +87,9 @@ export default function MintPage({}) {
           </div>
         </div>
       </section>
+      <div className="absolute bottom-0" s>
+        <Footer></Footer>
+      </div>
     </>
   );
 }

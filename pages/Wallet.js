@@ -1,36 +1,42 @@
 import { useEffect, useState } from 'react';
 import { CONTRACT_ADDRESS, abi } from '../constants/mint';
 import Header from './components/header';
-import { useMoralis, useWeb3Contract, Moralis } from 'react-moralis';
+import Footer from './components/footer';
+import { useMoralis } from 'react-moralis';
 import { ToastContainer, toast } from 'react-toastify';
 import NFTBox from './components/NftBox';
-import { providers, Contract, ethers, BigNumber } from 'ethers';
-// import Moralis from 'moralis';
+import { providers, Contract, ethers } from 'ethers';
 
 export default function WalletPage() {
-  const [currentAccount, setCurrentAccount] = useState('');
   const [theArray, setTheArray] = useState([]);
   const [auth, setAuth] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [loaded, setLoaded] = useState(false);
-
-  const { account, enableWeb3, isWeb3Enabled } = useMoralis();
+  const [update, setUpdate] = useState(false);
+  const { enableWeb3, account, isWeb3Enabled, chainId } = useMoralis();
 
   const runMethod = async () => {
     const { ethereum } = window;
 
     if (ethereum) {
+      if (account == '') {
+        toast.error('Account missing');
+        return;
+      }
+      if (chainId != '0x5') {
+        toast.error('Wrong Network');
+        return;
+      }
       toast.info('Loading', { hideProgressBar: true });
       setLoading(true);
-      const provider = new ethers.providers.Web3Provider(ethereum);
+      const provider = new providers.Web3Provider(ethereum);
       console.log('provider:', provider);
       const signer = provider.getSigner();
-      const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
-      const balance = await contract.balanceOf(currentAccount);
+      const contract = new Contract(CONTRACT_ADDRESS, abi, signer);
+      const balance = await contract.balanceOf(account);
       console.log(balance);
       const arr = [];
       for (let i = 0; i < balance; i++) {
-        const id = await contract.tokenOfOwnerByIndex(currentAccount, i);
+        const id = await contract.tokenOfOwnerByIndex(account, i);
         arr.push(id.toNumber());
         console.log(id);
       }
@@ -38,41 +44,9 @@ export default function WalletPage() {
       console.log('theArray:', theArray);
       console.log('arr', arr);
       setLoading(false);
-      setLoaded(true);
       toast.dismiss();
     } else {
       toast.error('Wallet Not Connected');
-    }
-  };
-  const checkIsAuthenticated = async () => {
-    try {
-      const { ethereum } = window;
-      const provider = new ethers.providers.Web3Provider(ethereum);
-      if (!ethereum) {
-        return toast('No ethereum wallet found');
-      }
-      const accounts = await ethereum.request({ method: 'eth_accounts' });
-      if (accounts?.length) {
-        const acc = accounts[0];
-        setCurrentAccount(acc);
-        console.log('checkIsAuthenticated:accounts?.length::', acc);
-      }
-      console.log('currentAccount:', currentAccount);
-      const { chainId } = await provider.getNetwork();
-      if (chainId != '0x5') {
-        try {
-          await ethereum.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x5' }],
-          });
-        } catch (e) {
-          toast.error(e.message);
-          setCurrentAccount('');
-        }
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.message);
     }
   };
 
@@ -81,32 +55,33 @@ export default function WalletPage() {
       const { ethereum } = window;
       const provider = new ethers.providers.Web3Provider(ethereum);
       const { chainId } = await provider.getNetwork();
-      if (chainId != '0x5')
-        await provider.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x5' }],
-        });
+      if (chainId != '0x5') {
+        setUpdate(true);
+        try {
+          await ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x5' }],
+          });
+        } catch (e) {
+          toast.error(e.message);
+          setUpdate(false);
+        }
+      }
+      setUpdate(false);
     };
-    console.log('loaded', loaded);
-    // if (!isWeb3Enabled) {
-    //   enableWeb3({ chainId: '0x5' }).then((e) => {
-    //     console.log(account);
-    //     setTimeout(() => {
-    //       runMethod();
-    //     }, 1000);
-    //   });
-    // }
-    checkIsAuthenticated();
-  }, [theArray, loading, loaded]);
+    if (!isWeb3Enabled) enableWeb3();
+    if (chainId !== '0x5' && !update) switchNetwork();
+  }, [theArray, loading, auth, chainId]);
 
   return (
     <>
       <ToastContainer />
       {Header({
-        currentAddress: currentAccount,
-        walletConnected: isWeb3Enabled,
+        currentAddress: account,
+        walletConnected: auth,
         click: () => {
           runMethod();
+          setAuth(true);
         },
       })}
 
@@ -116,7 +91,7 @@ export default function WalletPage() {
           {!loading ? (
             <div className="grid lg:grid-cols-3 gap-x-6">
               {theArray.map((id) => (
-                <NFTBox key={id} id={id}></NFTBox>
+                <NFTBox key={id % 50} id={id}></NFTBox>
               ))}
             </div>
           ) : (
@@ -140,6 +115,9 @@ export default function WalletPage() {
             </div>
           )}
         </section>
+      </div>
+      <div className="absolute bottom-0" s>
+        <Footer></Footer>
       </div>
     </>
   );

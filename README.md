@@ -1,27 +1,10 @@
-# Next.js + Tailwind CSS Example
+# NextJs-Hardhat-Ethereum-Tailwind-Firebase-Dapp-Boilerplate
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+NextJS module that consist lots of packages and config files
 
-## Deploy your own
+In order to save data off chain on firebase you need to create a firebase account and firestore database. After that you need to create collection and set up firebase Config file; Firebase will save the addresses which has joined whitelist outside the blockchain. So you can save another input as well to save gas in smart contracts.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+Check Demo
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+<https://next-js-hardhat-ethereum-tailwind-firebase-dapp-boilerplate.vercel.app/>
+![image](https://user-images.githubusercontent.com/45846424/188283590-af6327af-26e1-4c0f-b354-afd0818e49a5.png)
