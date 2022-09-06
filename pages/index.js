@@ -274,7 +274,10 @@ export default function Home() {
             <div className="flex justify-center">{renderButton()}</div>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <Image src="./crypto-devs.svg" alt="devs" />
+            {
+              //eslint-disable-next-line
+            }
+            <img src="./crypto-devs.svg" alt="devs" />
           </div>
         </div>
       </section>
